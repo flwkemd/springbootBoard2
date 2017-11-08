@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -70,11 +71,11 @@ public class BoardController {
     		String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase(); 
     		File destinationFile; 
     		String destinationFileName; 
-    		String fileUrl = "C:\\Users\\flwke\\workspace(spring)\\bootBoard2\\src\\main\\webapp\\WEB-INF\\uploadFiles\\";
+    		//String fileUrl = "C:\\Users\\flwke\\workspace(spring)\\bootBoard2\\src\\main\\webapp\\WEB-INF\\uploadFiles\\";
     		
     		do { 
     			destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension; 
-    			destinationFile = new File(fileUrl+ destinationFileName); 
+    			destinationFile = new File(uploadFileDir+ destinationFileName); 
     		} while (destinationFile.exists()); 
     		
     		destinationFile.getParentFile().mkdirs(); 
@@ -85,7 +86,7 @@ public class BoardController {
     		file.setBno(board.getBno());
     		file.setFileName(destinationFileName);
     		file.setFileOriName(fileName);
-    		file.setFileUrl(fileUrl);
+    		file.setFileUrl(uploadFileDir);
     		
     		mBoardService.fileInsertService(file); //file insert
     	}
@@ -180,5 +181,8 @@ public class BoardController {
         
         return "redirect:/list";
     }
+    
+    @Value("${file.upload.directory}") //사용할 설정 주입
+    String uploadFileDir;
     
 }
