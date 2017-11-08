@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.board.domain.BoardVO;
+import com.example.demo.board.domain.FileVO;
 
 @Repository("com.example.demo.board.mapper.BoardMapper") 
 // 해당 클래스가 데이터베이스에 접근하는 클래스
@@ -26,5 +27,11 @@ public interface BoardMapper {
     
     //게시글 삭제  
     public int boardDelete(int bno) throws Exception;
+    
+    //파일 등록
+    public int fileInsert(FileVO file) throws Exception;
+
+    //파일 상세
+    public FileVO fileDetail(int bno) throws Exception;
 
 }
