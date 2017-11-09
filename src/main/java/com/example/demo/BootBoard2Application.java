@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-@MapperScan(value= {"com.example.demo.board.mapper"}) // mapper 인터페이스 인식할 수 있도록 서정
+@MapperScan(value= {"com.example.demo.board.mapper", "com.example.demo.user.mapper"}) // mapper 인터페이스 인식할 수 있도록 서정
 public class BootBoard2Application {
 
 	public static void main(String[] args) {
